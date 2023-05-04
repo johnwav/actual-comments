@@ -1,0 +1,16 @@
+.voteContainer {
+  height: 96px;
+  min-width: 40px;
+  background-color: var(--Light-gray);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 14px;
+  color: var(--Moderate-blue);
+}
+
+.button {
+    padding: 10px;
+}

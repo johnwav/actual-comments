@@ -1,14 +1,63 @@
-.container{
-    width: 730px;
-    height: 168px;
-    background-color:var(--White);
-    margin: auto;
-    padding: 24px;
+.container {
+  width: 730px;
+  height: 166px;
+  background-color: var(--White);
+  margin: auto;
+  padding: 24px;
+  border-radius: 10px;
+  display: flex;
+  gap: 28px;
 }
 
-.voteContainer{
-    height: 96px;
-    width: 38px;
-    background-color: var(--Light-gray);
-    border-radius: 10px;
+header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+  justify-content: space-between;
+}
+
+header div {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+header .profileImage {
+  height: 34px;
+  width: 34px;
+}
+
+header .profileImage img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+.username {
+  color: var(--Dark-blue);
+}
+
+.date {
+  color: var(--Grayish-Blue);
+}
+
+.button {
+  outline: transparent;
+  background-color: inherit;
+  border: none;
+  color: var(--Moderate-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.commentBody {
+  color: var(--Grayish-Blue);
+  font-size: 16px;
+  font-weight: 200;
+  line-height: 1.5;
+  text-align: left;
 }

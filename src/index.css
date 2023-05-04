@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&family=Open+Sans:wght@600;800&family=Poppins:ital,wght@0,700;1,400;1,800&display=swap");
 
 :root {
-  font-family: "Barlow Semi Condensed", sans-serif;
+  /* font-family: "Barlow Semi Condensed", sans-serif; */
+  font-family: "Open Sans", sans-serif;
 
   /*  Colors */
 
@@ -21,8 +22,14 @@
   --White: hsl(0, 0%, 100%);
 }
 
-
 body {
   margin: 0;
   max-width: 1440px;
+}
+
+button {
+  outline: transparent;
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
 }
