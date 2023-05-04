@@ -7,7 +7,7 @@ import styles from "./Comment.module.css";
 // }
 
 
-const Comment = (data: string) => {
+const Comment = ({data) => {
   return (
     <div className={styles.container}>
       <Vote />
