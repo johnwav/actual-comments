@@ -21,6 +21,8 @@
   --White: hsl(0, 0%, 100%);
 }
 
+
 body {
   margin: 0;
+  max-width: 1440px;
 }

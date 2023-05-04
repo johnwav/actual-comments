@@ -2,3 +2,11 @@
   max-width: 1440px;
   margin: 0 auto;
 }
+
+
+.app {
+  margin: auto;
+  background-color: var(--Very-light-gray);
+  width: 100vw;
+  height: 100vh;
+}
