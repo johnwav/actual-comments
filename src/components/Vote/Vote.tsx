@@ -1,8 +1,12 @@
 import { useState } from "react";
 import styles from "./Vote.module.css";
 
-const Vote = () => {
-  const [vote, setVote] = useState<number>(0);
+interface Score {
+  score: number;
+}
+
+const Vote = ({ score }: Score) => {
+  const [vote, setVote] = useState<number>(score);
 
   const increase = () => {
     setVote((prev) => prev + 1);
@@ -23,8 +27,5 @@ const Vote = () => {
     </div>
   );
 };
-
-
-
 
 export default Vote;

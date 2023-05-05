@@ -32,10 +32,9 @@ interface Props {
 
 const Comment = ({ comments }: Props) => {
 
-  console.log(comments);
   return (
     <div className={styles.container}>
-      <Vote />
+      <Vote score={comments.score} />
       <div className={styles.commentInfo}>
         <header>
           <div>
