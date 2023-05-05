@@ -7,9 +7,8 @@ function App() {
 
   return (
     <div className="app">
-      {/* <Comment /> */}
       {comments.map((comment) => {
-        return <Comment key={comment.id} content={comment.content} />;
+        return <Comment key={comment.id} comments={comment} />;
       })}
       <AddComment />
     </div>

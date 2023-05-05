@@ -9,7 +9,7 @@ interface User {
   username: string;
 }
 
-interface Props {
+interface Comment {
   id: number;
   content: string;
   createdAt: string;
@@ -22,30 +22,17 @@ interface Props {
     score: number;
     replyingTo?: string;
     user: User;
-  };
+  }[];
 }
 
-// interface Comment {
-//   id: number;
-//   content: string;
-//   createdAt: string;
-//   score: number;
-//   user: {
-//     image: {
-//       png: string;
-//       webp: string;
-//     };
-//     username: string;
-//   };
-//   replies: Comment[];
-//   replyingTo?: string;
-// }
 
-type CommentList = Props;
+interface Props {
+  comments: Comment;
+}
 
-const Comment: React.FC<CommentList> = ({content}, {}) => {
+const Comment = ({ comments }: Props) => {
 
-console.log(content)
+  console.log(comments);
   return (
     <div className={styles.container}>
       <Vote />
@@ -53,18 +40,18 @@ console.log(content)
         <header>
           <div>
             <div className={styles.profileImage}>
-              {/* <img src={data.user.image.webp} alt="userimage" /> */}
+              <img src={comments.user.image.webp} alt="userimage" />
             </div>
-            {/* <div className={styles.username}>{data.user.username}</div> */}
+            <div className={styles.username}>{comments.user.username}</div>
 
-            {/* <div className={styles.date}>{data.createdAt}</div> */}
+            <div className={styles.date}>{comments.createdAt}</div>
           </div>
           <button className={styles.button}>
             <img src="/images/icon-reply.svg" alt="" />
             Reply
           </button>
         </header>
-        <div className={styles.commentBody}>{content}</div>
+        <div className={styles.commentBody}>{comments.content}</div>
       </div>
     </div>
   );
