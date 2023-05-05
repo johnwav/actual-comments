@@ -9,7 +9,7 @@ function App() {
     <div className="app">
       {/* <Comment /> */}
       {comments.map((comment) => {
-        return <Comment key={comment.id} data={comment} />;
+        return <Comment key={comment.id} content={comment.content} />;
       })}
       <AddComment />
     </div>
