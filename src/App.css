@@ -3,12 +3,16 @@
   margin: 0 auto;
 }
 
+
+
 .app {
+  display: flex;
+  align-items: center;
   margin: auto;
-  background-color: var(--Very-light-gray);
   width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
   gap: 18px;
+  margin-block: 20px;
 }

@@ -1,42 +1,68 @@
 import styles from "./Replies.module.css";
 import Vote from "../Vote/Vote";
+import { useState } from "react";
+import AddReply from "../AddReply/AddReply";
 
-const Replies = () => {
+interface User {
+  image: {
+    png: string;
+    webp: string;
+  };
+  username: string;
+}
+
+interface Reply {
+  id: number;
+  content: string;
+  createdAt: string;
+  score: number;
+  replyingTo?: string | undefined;
+  user: User;
+}
+
+interface Props {
+  data?: Reply;
+}
+
+const Replies = ({ data }: Props) => {
+  const [toggleReply, setToggleReply] = useState(false);
   return (
-    <div className={styles.commentBox}>
-      <div className={styles.line}></div>
-      <div className={styles.container}>
-        <Vote score={0} />
-        <div className={styles.commentInfo}>
-          <header>
-            <div>
-              <div className={styles.profileImage}>
-                <img
-                  src="/images/avatars/image-ramsesmiron.webp"
-                  alt="userimage"
-                />
+    <div className={styles.replybox}>
+      <div className={styles.commentBox}>
+        <div className={styles.line}></div>
+        <div className={styles.container}>
+          <Vote score={data?.score ? data.score : 0} />
+          <div className={styles.commentInfo}>
+            <header>
+              <div>
+                <div className={styles.profileImage}>
+                  <img
+                    src={data?.user.image.webp}
+                    alt="userimage"
+                  />
+                </div>
+                <div className={styles.username}>{data?.user.username}</div>
+                <div className={styles.date}>{data?.createdAt} </div>
               </div>
-              <div className={styles.username}>username</div>
-              <div className={styles.date}>2 weeks ago</div>
-            </div>
 
-            <button
-              className={styles.button}
-              //   onClick={() => setToggleReply((prev) => !prev)}
-            >
-              <img src="/images/icon-reply.svg" alt="" />
-              Reply
-            </button>
-          </header>
-          <div className={styles.commentBody}>content</div>
+              <button
+                className={styles.button}
+                onClick={() => setToggleReply((prev) => !prev)}
+              >
+                <img src="/images/icon-reply.svg" alt="" />
+                Reply
+              </button>
+            </header>
+            <div className={styles.commentBody}>{data?.content}</div>
+          </div>
         </div>
       </div>
 
-      {/* {toggleReply && (
+      {toggleReply && (
         <div>
-          <AddComment isReply={true} />
+          <AddReply />
         </div>
-      )} */}
+      )}
     </div>
   );
 };

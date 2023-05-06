@@ -61,16 +61,17 @@ const Comment = ({ comments }: Props) => {
           <div className={styles.commentBody}>{comments.content}</div>
         </div>
       </div>
-
-      <div className={styles.replies}>
-        <Replies />
-      </div>
-
       {toggleReply && (
         <div>
           <AddComment isReply={true} />
         </div>
       )}
+
+      {comments.replies?.map((reply) => (
+        <div className={styles.replies}>
+          <Replies key={reply.id} data={reply} />
+        </div>
+      ))}
     </div>
   );
 };

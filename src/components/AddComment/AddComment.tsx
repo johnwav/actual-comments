@@ -17,8 +17,8 @@ const AddComment = ({isReply} : Type) => {
         className={styles.input}
         name="comment"
         id=""
-        cols={30}
-        rows={4}
+        cols={10}
+        rows={3}
       ></textarea>
       <button className={styles.send}>{isReply? "REPLY" : "SEND"}</button>
     </div>
