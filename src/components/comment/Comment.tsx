@@ -28,6 +28,7 @@ interface Comment {
   }[];
 }
 
+
 interface Props {
   comments: Comment;
 }
