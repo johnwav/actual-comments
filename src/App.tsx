@@ -2,6 +2,7 @@ import "./App.css";
 import AddComment from "./components/AddComment/AddComment";
 import Comment from "./components/comment/Comment";
 import comments from "./comments.json";
+import Replies from "./components/Replies/Replies";
 
 function App() {
 
@@ -10,7 +11,10 @@ function App() {
       {comments.map((comment) => {
         return <Comment key={comment.id} comments={comment} />;
       })}
-      <AddComment />
+
+      {/* <Replies /> */}
+
+      <AddComment isReply={false} />
     </div>
   );
 }

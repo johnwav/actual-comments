@@ -3,7 +3,6 @@
   margin: 0 auto;
 }
 
-
 .app {
   margin: auto;
   background-color: var(--Very-light-gray);
@@ -11,4 +10,5 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
+  gap: 18px;
 }

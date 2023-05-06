@@ -3,6 +3,7 @@ import Vote from "../Vote/Vote";
 import styles from "./Comment.module.css";
 // import Replies from "../Replies/Replies";
 import AddComment from "../AddComment/AddComment";
+import Replies from "../Replies/Replies";
 
 interface User {
   image: {
@@ -27,7 +28,6 @@ interface Comment {
     user: User;
   }[];
 }
-
 
 interface Props {
   comments: Comment;
@@ -61,6 +61,11 @@ const Comment = ({ comments }: Props) => {
           <div className={styles.commentBody}>{comments.content}</div>
         </div>
       </div>
+
+      <div className={styles.replies}>
+        <Replies />
+      </div>
+
       {toggleReply && (
         <div>
           <AddComment isReply={true} />

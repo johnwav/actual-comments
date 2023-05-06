@@ -1,0 +1,81 @@
+.commentBox {
+  display: flex;
+  width: 730px;
+  justify-content: space-between;
+}
+
+.line {
+  height: 166px;
+  width: 2px;
+  background: var(--Light-gray);
+  margin-inline: 40px;
+}
+
+.container {
+  width: 594px;
+  height: 118px;
+  background-color: var(--White);
+  margin: auto;
+  padding: 24px;
+  border-radius: 10px;
+  display: flex;
+  gap: 28px;
+}
+
+.commentInfo {
+  width: 100%;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+  justify-content: space-between;
+  width: 100%;
+}
+
+header div {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+header .profileImage {
+  height: 34px;
+  width: 34px;
+}
+
+header .profileImage img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+.username {
+  color: var(--Dark-blue);
+}
+
+.date {
+  color: var(--Grayish-Blue);
+}
+
+.button {
+  outline: transparent;
+  background-color: inherit;
+  border: none;
+  color: var(--Moderate-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.commentBody {
+  color: var(--Grayish-Blue);
+  font-size: 16px;
+  font-weight: 200;
+  line-height: 1.5;
+  text-align: left;
+}
