@@ -1,5 +1,12 @@
 import styles from "./AddComment.module.css";
-const AddComment = () => {
+
+interface Type {
+  isReply: boolean;
+}
+
+const AddComment = ({isReply} : Type) => {
+
+
   return (
     <div className={styles.container}>
       <div className={styles.userImage}>
@@ -13,7 +20,7 @@ const AddComment = () => {
         cols={30}
         rows={4}
       ></textarea>
-      <button className={styles.send}>SEND</button>
+      <button className={styles.send}>{isReply? "REPLY" : "SEND"}</button>
     </div>
   );
 };
