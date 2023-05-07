@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./Vote.module.css";
+// import { CommentsContext } from "../../Context/Comments";
 
 interface Score {
   score: number;
@@ -7,6 +8,7 @@ interface Score {
 
 const Vote = ({ score }: Score) => {
   const [vote, setVote] = useState(score);
+  // const data = useContext(CommentsContext);
 
   const increase = () => {
     setVote((prev) => prev + 1);

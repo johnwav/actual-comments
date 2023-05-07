@@ -12,9 +12,11 @@ function App() {
     <CommentsContext.Provider value={{ comments, setComments }}>
       <div className="app">
         {comments.map((comment) => {
-          return <Comment key={comment.id} comments={comment} />;
+          return (
+            <Comment id={comment.id} key={comment.id} comments={comment} />
+          );
         })}
-        <AddComment isReply={false} />
+        <AddComment id={0} isReply={false} />
       </div>
     </CommentsContext.Provider>
   );

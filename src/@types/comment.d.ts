@@ -24,8 +24,10 @@ export interface IComments {
 
 export type CommentContextType = {
   comments: IComments[];
-  setComments: React.Dispatch<React.SetStateAction<Array>>;
+  setComments: React.Dispatch<React.SetStateAction<>>;
 };
+
+
 
 export interface IReply {
   id: number;

@@ -1,11 +1,12 @@
 import { createContext } from "react";
-import { CommentContextType } from "../@types/comment";
+import { CommentContextType, IComments } from "../@types/comment";
 import data from "../comments.json";
 
 const initialContextValue: CommentContextType = {
   comments: data,
-  setComments: () => {},
+  setComments: ( comments: IComments) => {},
 };
+
 
 export const CommentsContext = createContext<CommentContextType | null>(
   initialContextValue

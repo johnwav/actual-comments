@@ -7,10 +7,15 @@ import { IComments } from "../../@types/comment";
 
 interface Props {
   comments: IComments;
+  id: IComments["id"];
 }
 
-const Comment = ({ comments }: Props) => {
+const Comment = ({ comments, id }: Props) => {
   const [toggleReply, setToggleReply] = useState(false);
+
+  const closeReply = (set: boolean) => {
+    setToggleReply(set);
+  };
 
   return (
     <div className={styles.commentBox}>
@@ -39,7 +44,7 @@ const Comment = ({ comments }: Props) => {
       </div>
       {toggleReply && (
         <div>
-          <AddComment isReply={true} />
+          <AddComment setToggleReply={closeReply} id={id} isReply={true} />
         </div>
       )}
 
