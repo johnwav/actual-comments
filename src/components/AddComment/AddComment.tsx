@@ -31,16 +31,19 @@ const AddComment = ({ isReply, id, setToggleReply }: Props) => {
       };
       data?.setComments([...data.comments, newComment]);
     } else {
+      const foundComment = data?.comments.find((comment) => comment.id === id);
+      const replyingTo = foundComment?.user.username;
+
       const newReply: IReply = {
         id: Math.floor(Math.random() * 10000) + 1,
-        content: inputContent,
+        // content: "@" + replyingTo + " " + inputContent,
+        content: [inputContent, replyingTo],
         createdAt: "Now",
         score: 1,
         user: currentUser,
-        replyingTo: "yourdad",
+        replyingTo: replyingTo,
       };
 
-      const foundComment = data?.comments.find((comment) => comment.id === id);
       if (foundComment) {
         const updatedReplies = [...foundComment.replies, newReply];
         const updatedComment = { ...foundComment, replies: updatedReplies };

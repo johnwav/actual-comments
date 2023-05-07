@@ -14,7 +14,7 @@ export interface IComments {
   user: User;
   replies: {
     id: number;
-    content: string;
+    content: string | Array;
     createdAt: string;
     score: number;
     replyingTo?: string;
@@ -27,11 +27,9 @@ export type CommentContextType = {
   setComments: React.Dispatch<React.SetStateAction<>>;
 };
 
-
-
 export interface IReply {
   id: number;
-  content: string;
+  content: string | Array;
   createdAt: string;
   score: number;
   replyingTo?: string | undefined;

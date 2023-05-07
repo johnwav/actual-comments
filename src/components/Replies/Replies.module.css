@@ -79,3 +79,7 @@ header .profileImage img {
   line-height: 1.5;
   text-align: left;
 }
+
+.commentBody span {
+  color: var(--Moderate-blue);
+}
