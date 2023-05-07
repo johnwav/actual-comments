@@ -29,7 +29,7 @@ export type CommentContextType = {
 
 export interface IReply {
   id: number;
-  content: string | Array;
+  content: string;
   createdAt: string;
   score: number;
   replyingTo?: string | undefined;

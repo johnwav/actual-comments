@@ -37,7 +37,7 @@ const AddComment = ({ isReply, id, setToggleReply }: Props) => {
       const newReply: IReply = {
         id: Math.floor(Math.random() * 10000) + 1,
         // content: "@" + replyingTo + " " + inputContent,
-        content: [inputContent, replyingTo],
+        content: inputContent,
         createdAt: "Now",
         score: 1,
         user: currentUser,
