@@ -24,5 +24,14 @@ export interface IComments {
 
 export type CommentContextType = {
   comments: IComments[];
-//   addComment: (comment: IComments[]) => void;
+  setComments: React.Dispatch<React.SetStateAction<Array>>;
 };
+
+export interface IReply {
+  id: number;
+  content: string;
+  createdAt: string;
+  score: number;
+  replyingTo?: string | undefined;
+  user: User;
+}

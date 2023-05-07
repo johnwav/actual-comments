@@ -9,7 +9,7 @@ import { useState } from "react";
 function App() {
   const [comments, setComments] = useState(data);
   return (
-    <CommentsContext.Provider value={{ comments }}>
+    <CommentsContext.Provider value={{ comments, setComments }}>
       <div className="app">
         {comments.map((comment) => {
           return <Comment key={comment.id} comments={comment} />;
