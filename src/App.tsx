@@ -7,9 +7,9 @@ import { CommentsContext } from "./Context/Comments";
 import { useState } from "react";
 
 function App() {
-  const [comments, setComments] = useState(data)
+  const [comments, setComments] = useState(data);
   return (
-    <CommentsContext.Provider value={{comments, setComments}}>
+    <CommentsContext.Provider value={{ comments }}>
       <div className="app">
         {comments.map((comment) => {
           return <Comment key={comment.id} comments={comment} />;
