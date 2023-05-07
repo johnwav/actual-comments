@@ -1,36 +1,12 @@
 import { useState } from "react";
 import Vote from "../Vote/Vote";
 import styles from "./Comment.module.css";
-// import Replies from "../Replies/Replies";
 import AddComment from "../AddComment/AddComment";
 import Replies from "../Replies/Replies";
-
-interface User {
-  image: {
-    png: string;
-    webp: string;
-  };
-  username: string;
-}
-
-interface Comment {
-  id: number;
-  content: string;
-  createdAt: string;
-  score: number;
-  user: User;
-  replies?: {
-    id: number;
-    content: string;
-    createdAt: string;
-    score: number;
-    replyingTo?: string;
-    user: User;
-  }[];
-}
+import { IComments } from "../../@types/comment";
 
 interface Props {
-  comments: Comment;
+  comments: IComments;
 }
 
 const Comment = ({ comments }: Props) => {

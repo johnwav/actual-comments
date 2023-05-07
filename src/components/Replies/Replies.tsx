@@ -2,26 +2,11 @@ import styles from "./Replies.module.css";
 import Vote from "../Vote/Vote";
 import { useState } from "react";
 import AddReply from "../AddReply/AddReply";
+import { IReply } from "../../@types/comment";
 
-interface User {
-  image: {
-    png: string;
-    webp: string;
-  };
-  username: string;
-}
-
-interface Reply {
-  id: number;
-  content: string;
-  createdAt: string;
-  score: number;
-  replyingTo?: string | undefined;
-  user: User;
-}
 
 interface Props {
-  data?: Reply;
+  data?: IReply;
 }
 
 const Replies = ({ data }: Props) => {
