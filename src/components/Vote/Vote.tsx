@@ -6,13 +6,15 @@ interface Score {
 }
 
 const Vote = ({ score }: Score) => {
-  const [vote, setVote] = useState<number>(score);
+  const [vote, setVote] = useState(score);
 
   const increase = () => {
     setVote((prev) => prev + 1);
   };
   const decrease = () => {
-    setVote((prev) => (prev === 1 ? 1 : prev - 1));
+    if (score) {
+      setVote((prev) => (prev === 1 ? 1 : prev - 1));
+    }
   };
 
   return (
