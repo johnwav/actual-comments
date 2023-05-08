@@ -8,15 +8,17 @@ import { useState } from "react";
 
 function App() {
   const [comments, setComments] = useState(data);
+  const nullFunc = () => {};
   return (
     <CommentsContext.Provider value={{ comments, setComments }}>
       <div className="app">
-        {comments.map((comment) => {
+
+        {comments.sort((a, b) => b.score -a.score).map((comment) => {
           return (
             <Comment id={comment.id} key={comment.id} comments={comment} />
           );
         })}
-        <AddComment id={0} isReply={false} />
+        <AddComment setToggleReply={nullFunc} id={0} isReply={false} />
       </div>
     </CommentsContext.Provider>
   );
