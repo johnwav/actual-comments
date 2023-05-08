@@ -1,5 +1,10 @@
 import styles from "./AddReply.module.css";
-const AddReply = () => {
+
+interface Props {
+  setToggleReply: (toggle: boolean) => void;
+}
+
+const AddReply = ({ setToggleReply }: Props) => {
   return (
     <div className={styles.replybox}>
       <div className={styles.commentBox}>
@@ -16,7 +21,9 @@ const AddReply = () => {
             cols={10}
             rows={3}
           ></textarea>
-          <button className={styles.send}>REPLY</button>
+          <button onClick={() => setToggleReply(false)} className={styles.send}>
+            REPLY
+          </button>
         </div>
       </div>
     </div>

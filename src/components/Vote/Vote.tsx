@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import styles from "./Vote.module.css";
 import { CommentsContext } from "../../Context/Comments";
-import { IComments, IReply, User } from "../../@types/comment";
+import { IComments, IReply } from "../../@types/comment";
 
 interface Props {
   score: number;
@@ -33,20 +33,13 @@ const Vote = ({ score, id, isreply, replies }: Props) => {
     }
   };
 
-  const updateReply = (_reply: {
-    score: number;
-    id?: number | undefined;
-    content?: string | undefined;
-    createdAt?: string | undefined;
-    replyingTo?: string | undefined;
-    user?: User | undefined;
-  }) => {
+  const updateReply = () => {
     data?.setComments((prevComments: IComments[] | undefined) => {
       if (prevComments) {
         const updatedComments = prevComments.map((comment) => {
           const updatedReplies = comment.replies.map((reply: IReply) => {
             if (reply.id === replies?.id) {
-              return _reply;
+              return {...reply, score: vote};
             }
             return reply;
           });
@@ -72,8 +65,7 @@ const Vote = ({ score, id, isreply, replies }: Props) => {
     if (!isreply) {
       updateComment(data?.comments, id);
     } else {
-      const updatedReply = { ...replies, score: vote };
-      updateReply(updatedReply);
+      updateReply();
     }
   }, [vote]);
 

@@ -10,12 +10,22 @@ interface Props {
 
 const Replies = ({ data }: Props) => {
   const [toggleReply, setToggleReply] = useState(false);
+
+  const closeReply = (set: boolean) => {
+    setToggleReply(set);
+  };
+
   return (
     <div className={styles.replybox}>
       <div className={styles.commentBox}>
         <div className={styles.line}></div>
         <div className={styles.container}>
-          <Vote score={data?.score ? data.score : 0} id={data?.id? data?.id : 1} isreply={true}  replies ={data}/>
+          <Vote
+            score={data?.score ? data.score : 0}
+            id={data?.id ? data?.id : 1}
+            isreply={true}
+            replies={data}
+          />
           <div className={styles.commentInfo}>
             <header>
               <div>
@@ -44,7 +54,7 @@ const Replies = ({ data }: Props) => {
 
       {toggleReply && (
         <div>
-          <AddReply />
+          <AddReply setToggleReply={closeReply} />
         </div>
       )}
     </div>
