@@ -15,7 +15,7 @@ const Replies = ({ data }: Props) => {
       <div className={styles.commentBox}>
         <div className={styles.line}></div>
         <div className={styles.container}>
-          <Vote score={data?.score ? data.score : 0} />
+          <Vote score={data?.score ? data.score : 0} id={data?.id? data?.id : 1} isreply={true}  replies ={data}/>
           <div className={styles.commentInfo}>
             <header>
               <div>

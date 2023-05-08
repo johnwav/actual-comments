@@ -17,10 +17,11 @@ const Comment = ({ comments, id }: Props) => {
     setToggleReply(set);
   };
 
+
   return (
     <div className={styles.commentBox}>
       <div className={styles.container}>
-        <Vote score={comments.score} />
+        <Vote score={comments.score} id={id} isreply={false}  replies={undefined}/>
         <div className={styles.commentInfo}>
           <header>
             <div>

@@ -1,23 +1,81 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "./Vote.module.css";
-// import { CommentsContext } from "../../Context/Comments";
+import { CommentsContext } from "../../Context/Comments";
+import { IComments, IReply, User } from "../../@types/comment";
 
-interface Score {
+interface Props {
   score: number;
+  id: IComments["id"];
+  isreply: boolean;
+  replies: IReply | undefined;
 }
 
-const Vote = ({ score }: Score) => {
+const Vote = ({ score, id, isreply, replies }: Props) => {
   const [vote, setVote] = useState(score);
-  // const data = useContext(CommentsContext);
+  const data = useContext(CommentsContext);
+  const updateComment = (
+    comments: IComments[] | undefined,
+    id: IComments["id"]
+  ) => {
+    const foundComment = comments?.find((comment) => comment.id === id);
+    if (foundComment) {
+      const updatedScore = vote;
+      const updatedComment = { ...foundComment, score: updatedScore };
+      data?.setComments((prevComments: IComments[] | undefined) => {
+        if (prevComments) {
+          const updatedComments = prevComments.map((comment) =>
+            comment.id === id ? updatedComment : comment
+          );
+          return updatedComments;
+        }
+        return prevComments;
+      });
+    }
+  };
+
+  const updateReply = (_reply: {
+    score: number;
+    id?: number | undefined;
+    content?: string | undefined;
+    createdAt?: string | undefined;
+    replyingTo?: string | undefined;
+    user?: User | undefined;
+  }) => {
+    data?.setComments((prevComments: IComments[] | undefined) => {
+      if (prevComments) {
+        const updatedComments = prevComments.map((comment) => {
+          const updatedReplies = comment.replies.map((reply: IReply) => {
+            if (reply.id === replies?.id) {
+              return _reply;
+            }
+            return reply;
+          });
+          return { ...comment, replies: updatedReplies };
+        });
+        return updatedComments;
+      }
+      return prevComments;
+    });
+  };
 
   const increase = () => {
     setVote((prev) => prev + 1);
   };
+
   const decrease = () => {
     if (score) {
       setVote((prev) => (prev === 1 ? 1 : prev - 1));
     }
   };
+
+  useEffect(() => {
+    if (!isreply) {
+      updateComment(data?.comments, id);
+    } else {
+      const updatedReply = { ...replies, score: vote };
+      updateReply(updatedReply);
+    }
+  }, [vote]);
 
   return (
     <div className={styles.voteContainer}>
