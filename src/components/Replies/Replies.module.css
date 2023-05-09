@@ -83,3 +83,28 @@ header .profileImage img {
 .commentBody span {
   color: var(--Moderate-blue);
 }
+
+
+.you{
+  width: 36px;
+  height: 20px;
+  background-color: var(--Moderate-blue);
+  text-align: center;
+  color: white;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+}
+
+.dlt {
+  outline: transparent;
+  background-color: inherit;
+  border: none;
+  color: var(--Soft-Red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}

@@ -2,9 +2,10 @@ import styles from "./AddReply.module.css";
 
 interface Props {
   setToggleReply: (toggle: boolean) => void;
+  isReply: boolean
 }
 
-const AddReply = ({ setToggleReply }: Props) => {
+const AddReply = ({ setToggleReply, isReply }: Props) => {
   return (
     <div className={styles.replybox}>
       <div className={styles.commentBox}>

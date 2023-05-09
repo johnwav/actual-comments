@@ -3,17 +3,21 @@ import Vote from "../Vote/Vote";
 import { useState } from "react";
 import AddReply from "../AddReply/AddReply";
 import { IReply } from "../../@types/comment";
+import user from "../../data.json";
 
 interface Props {
   data?: IReply;
+  key: IReply["id"];
 }
 
-const Replies = ({ data }: Props) => {
+const Replies = ({ data, key }: Props) => {
   const [toggleReply, setToggleReply] = useState(false);
 
   const closeReply = (set: boolean) => {
     setToggleReply(set);
   };
+
+  const handleDelete = () => {};
 
   return (
     <div className={styles.replybox}>
@@ -32,17 +36,38 @@ const Replies = ({ data }: Props) => {
                 <div className={styles.profileImage}>
                   <img src={data?.user.image.webp} alt="userimage" />
                 </div>
-                <div className={styles.username}>{data?.user.username}</div>
+                <div className={styles.username}>
+                  {data?.user.username}
+                  {user.currentUser.username === data?.user.username && (
+                    <div className={styles.you}>you</div>
+                  )}
+                </div>
                 <div className={styles.date}>{data?.createdAt} </div>
               </div>
 
-              <button
-                className={styles.button}
-                onClick={() => setToggleReply((prev) => !prev)}
-              >
-                <img src="/images/icon-reply.svg" alt="" />
-                Reply
-              </button>
+              <div className={styles.buttonGrp}>
+                {user?.currentUser?.username === data?.user.username ? (
+                  <>
+                    <button
+                      className={styles.dlt}
+                      onClick={() => handleDelete()}
+                    >
+                      <img src="/images/icon-delete.svg"></img> Delete
+                    </button>
+                    <button className={styles.button}>
+                      <img src="/images/icon-edit.svg" /> Edit
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    className={styles.button}
+                    onClick={() => setToggleReply((prev) => !prev)}
+                  >
+                    Reply
+                    <img src="/images/icon-reply.svg" alt="" />
+                  </button>
+                )}
+              </div>
             </header>
             <div className={styles.commentBody}>
               <span>@{data?.replyingTo} </span>
@@ -54,7 +79,7 @@ const Replies = ({ data }: Props) => {
 
       {toggleReply && (
         <div>
-          <AddReply setToggleReply={closeReply} />
+          <AddReply isReply={true} setToggleReply={closeReply} />
         </div>
       )}
     </div>
