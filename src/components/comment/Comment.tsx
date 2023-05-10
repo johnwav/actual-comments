@@ -53,7 +53,7 @@ const Comment = ({ comments, id }: Props) => {
         ?.sort((a, b) => b.score - a.score)
         .map((reply) => (
           <div className={styles.replies}>
-            <Replies key={reply.id} data={reply} />
+            <Replies id={reply.id} data={reply} />
           </div>
         ))}
     </div>

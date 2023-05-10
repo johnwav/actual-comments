@@ -6,11 +6,11 @@ import { IReply } from "../../@types/comment";
 import user from "../../data.json";
 
 interface Props {
-  data?: IReply;
-  key: IReply["id"];
+  data?: IReply | undefined
+  id: IReply["id"];
 }
 
-const Replies = ({ data, key }: Props) => {
+const Replies = ({ data,  }: Props) => {
   const [toggleReply, setToggleReply] = useState(false);
 
   const closeReply = (set: boolean) => {
@@ -79,7 +79,7 @@ const Replies = ({ data, key }: Props) => {
 
       {toggleReply && (
         <div>
-          <AddReply isReply={true} setToggleReply={closeReply} />
+          <AddReply id={data?.id} data={data} isReply={true} setToggleReply={closeReply} />
         </div>
       )}
     </div>
