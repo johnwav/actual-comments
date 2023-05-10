@@ -3,7 +3,9 @@ import Vote from "../Vote/Vote";
 import styles from "./Comment.module.css";
 import AddComment from "../AddComment/AddComment";
 import Replies from "../Replies/Replies";
-import { IComments } from "../../@types/comment";
+import { IComments, IReply } from "../../@types/comment";
+import { useContext } from "react";
+import { CommentsContext } from "../../Context/Comments";
 
 interface Props {
   comments: IComments;
@@ -11,17 +13,30 @@ interface Props {
 }
 
 const Comment = ({ comments, id }: Props) => {
+  const source = useContext(CommentsContext);
   const [toggleReply, setToggleReply] = useState(false);
 
   const closeReply = (set: boolean) => {
     setToggleReply(set);
   };
 
+  const edit = (id: IReply["id"] | undefined) => {
+    console.log(id);
+    // const newReply = heyyyyy
+    const foundCommment = source?.comments.find((comment) =>
+      comment.replies.map((reply) => (reply.id === id ? "" : ""))
+    );
+  };
 
   return (
     <div className={styles.commentBox}>
       <div className={styles.container}>
-        <Vote score={comments.score} id={id} isreply={false}  replies={undefined}/>
+        <Vote
+          score={comments.score}
+          id={id}
+          isreply={false}
+          replies={undefined}
+        />
         <div className={styles.commentInfo}>
           <header>
             <div>
@@ -53,7 +68,7 @@ const Comment = ({ comments, id }: Props) => {
         ?.sort((a, b) => b.score - a.score)
         .map((reply) => (
           <div className={styles.replies}>
-            <Replies id={reply.id} data={reply} />
+            <Replies edit={edit} id={reply.id} data={reply} />
           </div>
         ))}
     </div>

@@ -2,22 +2,44 @@ import styles from "./Replies.module.css";
 import Vote from "../Vote/Vote";
 import { useState } from "react";
 import AddReply from "../AddReply/AddReply";
-import { IReply } from "../../@types/comment";
+import { IComments, IReply } from "../../@types/comment";
 import user from "../../data.json";
+import { useContext } from "react";
+import { CommentsContext } from "../../Context/Comments";
 
 interface Props {
-  data?: IReply | undefined
+  data?: IReply | undefined;
   id: IReply["id"];
+  edit: (id: IReply["id"] | undefined)  => void;
 }
 
-const Replies = ({ data,  }: Props) => {
+const Replies = ({ data, id, edit }: Props) => {
+  const source = useContext(CommentsContext);
   const [toggleReply, setToggleReply] = useState(false);
 
   const closeReply = (set: boolean) => {
     setToggleReply(set);
   };
 
-  const handleDelete = () => {};
+  const handleDelete = () => {
+    source?.setComments((prev: IComments[]) => {
+      if (prev) {
+        const Updatedcomments = prev.filter((comment) => {
+          const updatedReplies = comment.replies.filter(
+            (reply) => reply.id !== id
+          );
+          comment.replies = updatedReplies;
+          return comment;
+        });
+        return Updatedcomments;
+      }
+    });
+  };
+
+  const handleEdit = () => {
+    edit(data?.id)
+  };
+
 
   return (
     <div className={styles.replybox}>
@@ -54,7 +76,10 @@ const Replies = ({ data,  }: Props) => {
                     >
                       <img src="/images/icon-delete.svg"></img> Delete
                     </button>
-                    <button className={styles.button}>
+                    <button
+                      onClick={() => handleEdit()}
+                      className={styles.button}
+                    >
                       <img src="/images/icon-edit.svg" /> Edit
                     </button>
                   </>
@@ -79,7 +104,12 @@ const Replies = ({ data,  }: Props) => {
 
       {toggleReply && (
         <div>
-          <AddReply id={data?.id} data={data} isReply={true} setToggleReply={closeReply} />
+          <AddReply
+            id={data?.id}
+            data={data}
+            isReply={true}
+            setToggleReply={closeReply}
+          />
         </div>
       )}
     </div>
