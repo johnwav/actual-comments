@@ -8,16 +8,17 @@ import Vote from "../Vote/Vote";
 
 interface Props {
   setToggleReply: (toggle: boolean) => void;
+  setToggleEdit: (toggle: boolean) => void;
   isReply: boolean;
   isEdit: boolean;
   id: IReply["id"] | undefined;
   data: IReply | undefined;
 }
 
-const AddReply = ({ setToggleReply, id, data, isEdit }: Props) => {
+const AddReply = ({ setToggleReply, id, data, isEdit, setToggleEdit }: Props) => {
   const source = useContext(CommentsContext);
   const [inputContent, setInputContent] = useState("");
-  const [inputEditContent, setInputEditContent] = useState("");
+  const [inputEditContent, setInputEditContent] = useState(data?.content);
 
   const handleReply = () => {
     const foundComment = source?.comments.find((comment: IComments) => {
@@ -50,7 +51,28 @@ const AddReply = ({ setToggleReply, id, data, isEdit }: Props) => {
     }
   };
 
-  const handleEdit = () => {};
+  console.log(data?.content);
+
+  const handleUpdate = () => {
+    source?.setComments((prev: IComments[] | undefined) => {
+      if (prev) {
+        prev.map((comment) => {
+          comment.replies.forEach((reply) => {
+            if (reply.id === id) {
+              reply.content = inputEditContent;
+            }
+          });
+        });
+        return prev;
+      }
+      return prev;
+    });
+    setToggleEdit(false)
+
+  };
+
+
+
   return (
     <div className={styles.replybox}>
       <div className={styles.commentBox}>
@@ -100,7 +122,7 @@ const AddReply = ({ setToggleReply, id, data, isEdit }: Props) => {
                 </header>
                 <div className={styles.commentBody}>
                   <textarea
-                    value={isEdit ? `${data?.content}` : inputEditContent}
+                    value={inputEditContent}
                     onChange={(e) => setInputEditContent(e.target.value)}
                     placeholder="Add a comment..."
                     className={styles.editArea}
@@ -109,16 +131,9 @@ const AddReply = ({ setToggleReply, id, data, isEdit }: Props) => {
                     cols={10}
                     rows={3}
                   ></textarea>
-
-                  {isEdit ? (
-                    <button onClick={handleEdit} className={styles.update}>
-                      UPDATE
-                    </button>
-                  ) : (
-                    <button onClick={handleReply} className={styles.send}>
-                      REPLY
-                    </button>
-                  )}
+                  <button onClick={handleUpdate} className={styles.update}>
+                    UPDATE
+                  </button>
                 </div>
               </div>
             </>
@@ -128,7 +143,6 @@ const AddReply = ({ setToggleReply, id, data, isEdit }: Props) => {
                 <img src="/images/avatars/image-juliusomo.webp" alt="" />
               </div>
               <textarea
-                value={isEdit ? `${data?.content}` : inputContent}
                 onChange={(e) => setInputContent(e.target.value)}
                 placeholder="Add a comment..."
                 className={styles.input}

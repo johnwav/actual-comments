@@ -13,7 +13,7 @@ interface Props {
   edit: (id: IReply["id"] | undefined) => void;
 }
 
-const Replies = ({ data, id, edit }: Props) => {
+const Replies = ({ data, id }: Props) => {
   const source = useContext(CommentsContext);
   const [toggleReply, setToggleReply] = useState(false);
   const [toggleEdit, setToggleEdit] = useState(false);
@@ -21,6 +21,12 @@ const Replies = ({ data, id, edit }: Props) => {
   const closeReply = (set: boolean) => {
     setToggleReply(set);
   };
+
+  const Null = () => {}
+
+  const closeEdit = (set: boolean) => {
+    setToggleEdit(set)
+  }
 
   const handleDelete = () => {
     source?.setComments((prev: IComments[]) => {
@@ -38,8 +44,7 @@ const Replies = ({ data, id, edit }: Props) => {
   };
 
   const handleEdit = () => {
-    setToggleEdit(true);
-    edit(data?.id);
+    setToggleEdit(prev  => !prev);
   };
 
   return (
@@ -52,6 +57,7 @@ const Replies = ({ data, id, edit }: Props) => {
             isReply={true}
             isEdit={true}
             setToggleReply={closeReply}
+            setToggleEdit= {closeEdit}
           />
         ) : (
           <>
@@ -124,6 +130,7 @@ const Replies = ({ data, id, edit }: Props) => {
             isReply={true}
             setToggleReply={closeReply}
             isEdit={false}
+            setToggleEdit={Null}
           />
         </div>
       )}

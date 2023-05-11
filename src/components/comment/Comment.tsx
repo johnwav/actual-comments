@@ -3,9 +3,7 @@ import Vote from "../Vote/Vote";
 import styles from "./Comment.module.css";
 import AddComment from "../AddComment/AddComment";
 import Replies from "../Replies/Replies";
-import { IComments, IReply } from "../../@types/comment";
-import { useContext } from "react";
-import { CommentsContext } from "../../Context/Comments";
+import { IComments } from "../../@types/comment";
 
 interface Props {
   comments: IComments;
@@ -13,20 +11,13 @@ interface Props {
 }
 
 const Comment = ({ comments, id }: Props) => {
-  const source = useContext(CommentsContext);
   const [toggleReply, setToggleReply] = useState(false);
 
   const closeReply = (set: boolean) => {
     setToggleReply(set);
   };
 
-  const edit = (id: IReply["id"] | undefined) => {
-    console.log(id);
-    // const newReply = heyyyyy
-    const foundCommment = source?.comments.find((comment) =>
-      comment.replies.map((reply) => (reply.id === id ? "" : ""))
-    );
-  };
+  const edit = () => {};
 
   return (
     <div className={styles.commentBox}>
