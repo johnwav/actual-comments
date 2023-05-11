@@ -4,6 +4,7 @@ import data from "../comments.json";
 
 const initialContextValue: CommentContextType = {
   comments: data,
+  //@ts-ignore
   setComments: ( comments: IComments) => {},
 };
 

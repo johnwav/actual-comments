@@ -54,13 +54,22 @@ const Vote = ({ score, id, isreply, replies, disabled }: Props) => {
 
   const increase = () => {
     if (disabled) return;
-    else setVote((prev) => prev + 1);
+    else
+      setVote((prev) => {
+        if (prev) {
+          return prev + 1;
+        }
+      });
   };
 
   const decrease = () => {
     if (disabled) return;
     else if (score) {
-      setVote((prev) => (prev === 1 ? 1 : prev - 1));
+      setVote((prev) => {
+        if (prev) {
+          return prev === 1 ? 1 : prev - 1;
+        }
+      });
     }
   };
 

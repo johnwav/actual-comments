@@ -27,7 +27,3 @@ function App() {
 }
 
 export default App;
-
-
-//TODO
-// if its a reply, you cannot reply your reply only update and delete. Comments too
