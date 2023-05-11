@@ -36,6 +36,7 @@ const Comment = ({ comments, id }: Props) => {
           id={id}
           isreply={false}
           replies={undefined}
+          disabled={false}
         />
         <div className={styles.commentInfo}>
           <header>

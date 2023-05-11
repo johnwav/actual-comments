@@ -4,18 +4,19 @@ import { CommentsContext } from "../../Context/Comments";
 import { IComments, IReply } from "../../@types/comment";
 
 interface Props {
-  score: number;
-  id: IComments["id"];
+  score: number | undefined;
+  id: IComments["id"] | undefined;
   isreply: boolean;
   replies: IReply | undefined;
+  disabled: boolean;
 }
 
-const Vote = ({ score, id, isreply, replies }: Props) => {
+const Vote = ({ score, id, isreply, replies, disabled }: Props) => {
   const [vote, setVote] = useState(score);
   const data = useContext(CommentsContext);
   const updateComment = (
     comments: IComments[] | undefined,
-    id: IComments["id"]
+    id: IComments["id"] | undefined
   ) => {
     const foundComment = comments?.find((comment) => comment.id === id);
     if (foundComment) {
@@ -39,7 +40,7 @@ const Vote = ({ score, id, isreply, replies }: Props) => {
         const updatedComments = prevComments.map((comment) => {
           const updatedReplies = comment.replies.map((reply: IReply) => {
             if (reply.id === replies?.id) {
-              return {...reply, score: vote};
+              return { ...reply, score: vote };
             }
             return reply;
           });
@@ -52,11 +53,13 @@ const Vote = ({ score, id, isreply, replies }: Props) => {
   };
 
   const increase = () => {
-    setVote((prev) => prev + 1);
+    if (disabled) return;
+    else setVote((prev) => prev + 1);
   };
 
   const decrease = () => {
-    if (score) {
+    if (disabled) return;
+    else if (score) {
       setVote((prev) => (prev === 1 ? 1 : prev - 1));
     }
   };

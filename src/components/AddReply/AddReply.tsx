@@ -4,17 +4,20 @@ import styles from "./AddReply.module.css";
 import user from "../../data.json";
 import { CommentsContext } from "../../Context/Comments";
 import { useContext } from "react";
+import Vote from "../Vote/Vote";
 
 interface Props {
   setToggleReply: (toggle: boolean) => void;
   isReply: boolean;
+  isEdit: boolean;
   id: IReply["id"] | undefined;
   data: IReply | undefined;
 }
 
-const AddReply = ({ setToggleReply, id, data }: Props) => {
+const AddReply = ({ setToggleReply, id, data, isEdit }: Props) => {
   const source = useContext(CommentsContext);
   const [inputContent, setInputContent] = useState("");
+  const [inputEditContent, setInputEditContent] = useState("");
 
   const handleReply = () => {
     const foundComment = source?.comments.find((comment: IComments) => {
@@ -46,26 +49,100 @@ const AddReply = ({ setToggleReply, id, data }: Props) => {
       setToggleReply(false);
     }
   };
+
+  const handleEdit = () => {};
   return (
     <div className={styles.replybox}>
       <div className={styles.commentBox}>
-        <div className={styles.line}></div>
-        <div className={styles.container}>
-          <div className={styles.userImage}>
-            <img src="/images/avatars/image-juliusomo.webp" alt="" />
-          </div>
-          <textarea
-            onChange={(e) => setInputContent(e.target.value)}
-            placeholder="Add a comment..."
-            className={styles.input}
-            name="comment"
-            id=""
-            cols={10}
-            rows={3}
-          ></textarea>
-          <button onClick={handleReply} className={styles.send}>
-            REPLY
-          </button>
+        <div className={`${isEdit ? styles.line2 : styles.line}`}></div>
+        <div className={`${isEdit ? styles.container2 : styles.container}`}>
+          {isEdit ? (
+            <>
+              <Vote
+                id={id}
+                isreply={false}
+                replies={data}
+                score={data?.score}
+                disabled={true}
+              />
+              <div className={styles.commentInfo}>
+                <header>
+                  <div>
+                    <div className={styles.profileImage}>
+                      <img src={data?.user.image.webp} alt="userimage" />
+                    </div>
+                    <div className={styles.username}>
+                      {data?.user.username}
+                      {user.currentUser.username === data?.user.username && (
+                        <div className={styles.you}>you</div>
+                      )}
+                    </div>
+                    <div className={styles.date}>{data?.createdAt} </div>
+                  </div>
+
+                  <div className={styles.buttonGrp}>
+                    {user?.currentUser?.username === data?.user.username ? (
+                      <>
+                        <button className={styles.dlt} disabled>
+                          <img src="/images/icon-delete.svg"></img> Delete
+                        </button>
+                        <button disabled className={styles.button}>
+                          <img src="/images/icon-edit.svg" /> Edit
+                        </button>
+                      </>
+                    ) : (
+                      <button className={styles.button} disabled>
+                        Reply
+                        <img src="/images/icon-reply.svg" alt="" />
+                      </button>
+                    )}
+                  </div>
+                </header>
+                <div className={styles.commentBody}>
+                  <textarea
+                    value={isEdit ? `${data?.content}` : inputEditContent}
+                    onChange={(e) => setInputEditContent(e.target.value)}
+                    placeholder="Add a comment..."
+                    className={styles.editArea}
+                    name="comment"
+                    id=""
+                    cols={10}
+                    rows={3}
+                  ></textarea>
+
+                  {isEdit ? (
+                    <button onClick={handleEdit} className={styles.update}>
+                      UPDATE
+                    </button>
+                  ) : (
+                    <button onClick={handleReply} className={styles.send}>
+                      REPLY
+                    </button>
+                  )}
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className={styles.userImage}>
+                <img src="/images/avatars/image-juliusomo.webp" alt="" />
+              </div>
+              <textarea
+                value={isEdit ? `${data?.content}` : inputContent}
+                onChange={(e) => setInputContent(e.target.value)}
+                placeholder="Add a comment..."
+                className={styles.input}
+                name="comment"
+                id=""
+                cols={10}
+                rows={3}
+              ></textarea>
+
+              <button onClick={handleReply} className={styles.send}>
+                REPLY
+              </button>
+            </>
+          )}
         </div>
       </div>
     </div>
