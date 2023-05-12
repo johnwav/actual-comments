@@ -24,8 +24,8 @@ const AddComment = ({ isReply, id, setToggleReply }: Props) => {
       const newComment: IComments = {
         id: Math.floor(Math.random() * 10000) + 1,
         content: inputContent,
-        createdAt: "2 days ago",
-        score: 2,
+        createdAt: "today",
+        score: 1,
         user: currentUser,
         replies: [],
       };

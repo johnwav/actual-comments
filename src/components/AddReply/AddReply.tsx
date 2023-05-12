@@ -29,7 +29,7 @@ const AddReply = ({ setToggleReply, id, data, isEdit, setToggleEdit }: Props) =>
     const newReply: IReply = {
       id: Math.floor(Math.random() * 10000) + 1,
       content: inputContent,
-      createdAt: "now",
+      createdAt: "today",
       score: 1,
       user: user.currentUser,
       replyingTo: data?.user.username,
